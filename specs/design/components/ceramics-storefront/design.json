@@ -1,0 +1,16 @@
+{
+  "name": "ceramics-storefront",
+  "type": "web-application",
+  "version": "0.1.0",
+  "language": "TypeScript",
+  "buildpack": "docker",
+  "appPath": "ceramics-storefront",
+  "entrypoint": "deployment/web-application",
+  "exposure": "internet",
+  "dependencies": [
+    { "kind": "component", "name": "ceramics-api", "description": "Catalog browsing, cart management, checkout, and the shopper's own order history/profile." },
+    { "kind": "platform-resource", "name": "user-auth", "resourceType": "thunder-app", "description": "Shopper registration, sign-in, session, and password reset." }
+  ],
+  "description": "React SPA storefront where shoppers browse the ceramics catalog, manage a cart, check out with an integrated payment provider, and view their own order history and profile. Signs shoppers in via Thunder and calls ceramics-api for all catalog/cart/checkout/order data. Does not manage products, stock, or other shoppers' orders.",
+  "skillsApplied": ["react-webapp", "thunder-authentication", "excalidraw-wireframes"]
+}

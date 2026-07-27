@@ -1,0 +1,16 @@
+{
+  "name": "ceramics-admin",
+  "type": "web-application",
+  "version": "0.1.0",
+  "language": "TypeScript",
+  "buildpack": "docker",
+  "appPath": "ceramics-admin",
+  "entrypoint": "deployment/web-application",
+  "exposure": "internet",
+  "dependencies": [
+    { "kind": "component", "name": "ceramics-api", "description": "Product/stock management and all-orders view + fulfillment-status updates." },
+    { "kind": "platform-resource", "name": "user-auth", "resourceType": "thunder-app", "description": "Seller sign-in and session; the seller's Thunder role group grants access to admin-only API operations." }
+  ],
+  "description": "React SPA admin console for the single store seller: create/edit/publish/delete products, adjust stock quantities, and view/manage all orders and their fulfillment status. Signs the seller in via Thunder (seller role group) and calls ceramics-api for all catalog/stock/order-management operations. Has no shopper-facing catalog, cart, or checkout screens.",
+  "skillsApplied": ["react-webapp", "thunder-authentication", "excalidraw-wireframes"]
+}
