@@ -12,10 +12,9 @@
     { "kind": "external", "name": "payment-provider", "style": "sdk", "package": "go:github.com/stripe/stripe-go/v79", "description": "Authorizes and captures checkout payments; the API never stores raw card details.", "config": [
       { "key": "STRIPE_SECRET_KEY", "secret": true, "description": "Stripe secret API key used to create and capture PaymentIntents." }
     ] },
-    { "kind": "external", "name": "email-provider", "description": "Sends order-confirmation and shipment-notification transactional emails to shoppers.", "candidates": [
-      { "name": "sendgrid", "style": "sdk", "package": "go:github.com/sendgrid/sendgrid-go" },
-      { "name": "resend", "style": "sdk", "package": "go:github.com/resend/resend-go/v2" },
-      { "name": "postmark", "style": "rest-api" }
+    { "kind": "external", "name": "email-provider", "style": "sdk", "package": "go:github.com/sendgrid/sendgrid-go", "description": "Sends order-confirmation and shipment-notification transactional emails to shoppers via SendGrid.", "config": [
+      { "key": "SENDGRID_API_KEY", "secret": true, "description": "SendGrid API key used to send transactional emails." },
+      { "key": "SENDGRID_FROM_EMAIL", "description": "Verified sender email address order/shipment notifications are sent from." }
     ] }
   ],
   "description": "Go service owning the product catalog, per-shopper cart, checkout orchestration, and orders for the ceramics store. Persists data in an embedded SQLite database. Exposes a single REST API consumed by both ceramics-storefront (shopper flows) and ceramics-admin (seller/catalog/order-management flows). Resolves the caller's role (shopper vs seller) from the gateway-injected X-User-Groups header and scopes cart/order data to the caller's own X-User-Id for shoppers. Re-validates stock at order placement, snapshots line-item price/name onto the order so later catalog edits never change a past order, decrements stock only after successful payment, and calls the payment provider and email provider to complete checkout. Does not implement its own authentication endpoints — Thunder issues tokens and the platform gateway validates them.",
